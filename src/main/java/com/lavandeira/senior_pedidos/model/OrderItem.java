@@ -1,6 +1,8 @@
 package com.lavandeira.senior_pedidos.model;
 
 import com.lavandeira.senior_pedidos.model.enumerated.ItemType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -40,7 +42,8 @@ public class OrderItem implements Serializable {
     @Column(name = "tp_item", insertable = false, updatable = false)
     private ItemType type;
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.JOIN)
     private List<Order> orders;
 
     public void setId(Long id) {

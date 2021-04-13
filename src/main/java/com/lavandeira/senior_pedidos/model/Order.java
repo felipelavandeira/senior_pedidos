@@ -1,6 +1,8 @@
 package com.lavandeira.senior_pedidos.model;
 
 import com.lavandeira.senior_pedidos.model.enumerated.OrderStatus;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
@@ -25,12 +27,13 @@ public class Order {
     @Column(name = "desconto")
     private BigDecimal discount;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "tb_pedido_item",
             joinColumns = @JoinColumn(name = "id_pedido"),
             inverseJoinColumns = @JoinColumn(name = "id_item")
     )
+    @Fetch(value = FetchMode.JOIN)
     private List<OrderItem> items;
 
     public void setId(Long id) {
