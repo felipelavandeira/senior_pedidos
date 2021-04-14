@@ -1,0 +1,2 @@
+ALTER TABLE IF EXISTS tb_item_pedido
+    ALTER COLUMN tp_item TYPE VARCHAR(1);

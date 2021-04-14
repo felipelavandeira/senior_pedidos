@@ -1,9 +1,3 @@
-CREATE SEQUENCE IF NOT EXISTS tb_pedido_item_id_pedido_item_seq
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
-
-
 CREATE TABLE IF NOT EXISTS tb_pedido_item
 (
     id_pedido_item SERIAL PRIMARY KEY,
