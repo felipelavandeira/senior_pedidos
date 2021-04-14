@@ -15,7 +15,9 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue
+    @Column(name = "id_pedido")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "pedido_generator", sequenceName = "tb_pedido_id_pedido_seq")
     private Long id;
 
     @Enumerated

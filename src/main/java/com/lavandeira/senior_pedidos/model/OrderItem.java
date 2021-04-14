@@ -1,13 +1,8 @@
 package com.lavandeira.senior_pedidos.model;
 
-import com.lavandeira.senior_pedidos.model.enumerated.ItemType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,14 +31,11 @@ public class OrderItem implements Serializable {
     @Column(name = "st_ativo")
     private Boolean active;
 
-    @Enumerated
     @NotNull
-    @Size(min = 1, max = 1)
     @Column(name = "tp_item", insertable = false, updatable = false)
-    private ItemType type;
+    private String type;
 
-    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.JOIN)
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public void setId(Long id) {
@@ -78,11 +70,11 @@ public class OrderItem implements Serializable {
         this.active = active;
     }
 
-    public ItemType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ItemType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
