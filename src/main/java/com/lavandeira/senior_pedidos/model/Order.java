@@ -20,7 +20,7 @@ public class Order {
     @SequenceGenerator(name = "pedido_generator", sequenceName = "tb_pedido_id_pedido_seq")
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
 
@@ -37,6 +37,10 @@ public class Order {
     )
     @Fetch(value = FetchMode.JOIN)
     private List<OrderItem> items;
+
+    @Column(name = "total")
+    @DecimalMin(value = "0")
+    private BigDecimal total;
 
     public void setId(Long id) {
         this.id = id;
@@ -68,5 +72,13 @@ public class Order {
 
     public void setItems(List<OrderItem> items) {
         this.items = items;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }

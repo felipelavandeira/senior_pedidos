@@ -1,5 +1,7 @@
 package com.lavandeira.senior_pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -36,6 +38,7 @@ public class OrderItem implements Serializable {
     private String type;
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Order> orders;
 
     public void setId(Long id) {
