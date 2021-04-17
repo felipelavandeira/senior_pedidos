@@ -1,6 +1,7 @@
 package com.lavandeira.senior_pedidos.controller.service;
 
 import com.lavandeira.senior_pedidos.exceptionhandler.exception.ClosedOrderDiscountException;
+import com.lavandeira.senior_pedidos.exceptionhandler.exception.DisabledItemException;
 import com.lavandeira.senior_pedidos.model.Order;
 import com.lavandeira.senior_pedidos.model.OrderItem;
 import com.lavandeira.senior_pedidos.model.Product;
@@ -41,7 +42,8 @@ public class OrderService {
     }
 
     private BigDecimal calculateTotal(OrderItem item, BigDecimal discount, BigDecimal total) {
-        return total.add(calculatePriceWithDiscount(item.getPrice(), discount));
+        BigDecimal pricewithDiscount = calculatePriceWithDiscount(item.getPrice(), discount);
+        return total.add(pricewithDiscount);
     }
 
     public void discountIsApplicable(Order order) {
@@ -56,11 +58,22 @@ public class OrderService {
         order.getItems().forEach(item -> {
             itemIds.add(item.getId());
         });
-        return itemRepository.findAllById(itemIds);
+        List<OrderItem> items = itemRepository.findAllById(itemIds);
+        validateItems(items);
+        return items;
+    }
+
+    private void validateItems(List<OrderItem> items) {
+        items.forEach(item ->{
+            if (!item.getActive()){
+                throw new DisabledItemException(
+                        messageSource.getMessage("createOrder.disabledItem", null, LocaleContextHolder.getLocale()));
+            }
+        });
     }
 
     private BigDecimal calculatePriceWithDiscount(BigDecimal price, BigDecimal discount) {
-        BigDecimal percentDiscount = discount.divide(BigDecimal.valueOf(100L), 3,RoundingMode.HALF_UP);
+        BigDecimal percentDiscount = discount.divide(BigDecimal.valueOf(100L), 5,RoundingMode.HALF_UP);
         return price.subtract(price.multiply(percentDiscount));
     }
 

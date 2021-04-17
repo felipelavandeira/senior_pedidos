@@ -1,5 +1,6 @@
 package com.lavandeira.senior_pedidos.controller;
 
+import com.lavandeira.senior_pedidos.controller.service.OrderItemService;
 import com.lavandeira.senior_pedidos.exceptionhandler.exception.NotFoundException;
 import com.lavandeira.senior_pedidos.model.Service;
 import com.lavandeira.senior_pedidos.model.repository.ServiceRepository;
@@ -15,6 +16,9 @@ public class ServiceController {
 
     @Autowired
     private ServiceRepository repository;
+
+    @Autowired
+    private OrderItemService service;
 
     @GetMapping
     public ResponseEntity<Page<Service>> index(Pageable pageable){
@@ -47,6 +51,7 @@ public class ServiceController {
     @DeleteMapping(path = {"/{id}"})
     public ResponseEntity<?> delete(@PathVariable long id){
         return repository.findById(id).map(record -> {
+            service.itemIsDeletable(record);
             repository.deleteById(id);
             return ResponseEntity.ok().build();
         }).orElseThrow(NotFoundException::new);

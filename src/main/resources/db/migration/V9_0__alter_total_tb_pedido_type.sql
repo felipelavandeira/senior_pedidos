@@ -1,0 +1,2 @@
+ALTER TABLE IF EXISTS tb_pedido
+    ALTER COLUMN total TYPE REAL;

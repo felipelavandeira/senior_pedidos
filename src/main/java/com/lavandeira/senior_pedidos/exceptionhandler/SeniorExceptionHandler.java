@@ -1,8 +1,9 @@
 package com.lavandeira.senior_pedidos.exceptionhandler;
 
 import com.lavandeira.senior_pedidos.exceptionhandler.exception.ClosedOrderDiscountException;
+import com.lavandeira.senior_pedidos.exceptionhandler.exception.DisabledItemException;
+import com.lavandeira.senior_pedidos.exceptionhandler.exception.NotDeletableItemException;
 import com.lavandeira.senior_pedidos.exceptionhandler.exception.NotFoundException;
-import org.apache.catalina.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -34,8 +35,12 @@ public class SeniorExceptionHandler extends ResponseEntityExceptionHandler {
                 request);
     }
 
-    @ExceptionHandler(value = {ClosedOrderDiscountException.class})
-    public ResponseEntity<Object> handleClosedOrderDiscount(ClosedOrderDiscountException exception, WebRequest request) {
+    @ExceptionHandler(value = {
+            ClosedOrderDiscountException.class,
+            NotDeletableItemException.class,
+            DisabledItemException.class
+    })
+    public ResponseEntity<Object> handleApplicationExceptions(RuntimeException exception, WebRequest request) {
         String userMessage = exception.getMessage();
         return handleExceptionInternal(
                 exception,
