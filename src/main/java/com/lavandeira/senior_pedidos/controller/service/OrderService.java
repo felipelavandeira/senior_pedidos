@@ -41,11 +41,6 @@ public class OrderService {
         return order;
     }
 
-    private BigDecimal calculateTotal(OrderItem item, BigDecimal discount, BigDecimal total) {
-        BigDecimal pricewithDiscount = calculatePriceWithDiscount(item.getPrice(), discount);
-        return total.add(pricewithDiscount);
-    }
-
     public void discountIsApplicable(Order order) {
         if (!order.getDiscount().equals(BigDecimal.ZERO) && order.getStatus().equals(OrderStatus.CLOSED)){
             throw new ClosedOrderDiscountException(
@@ -61,6 +56,11 @@ public class OrderService {
         List<OrderItem> items = itemRepository.findAllById(itemIds);
         validateItems(items);
         return items;
+    }
+
+    private BigDecimal calculateTotal(OrderItem item, BigDecimal discount, BigDecimal total) {
+        BigDecimal pricewithDiscount = calculatePriceWithDiscount(item.getPrice(), discount);
+        return total.add(pricewithDiscount);
     }
 
     private void validateItems(List<OrderItem> items) {
