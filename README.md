@@ -52,7 +52,7 @@ A listagem pode ser ordenada, e paginada com os atributos:
 
 
 #### GET
-O endpoint para a consulta de um produto é o http://localhost:8080/produtos/*{id}*
+O endpoint para a consulta de um produto é o http://localhost:8080/produtos/{id}
 
 > Onde *{id}* deve conter o ID de um produto válido.
 
@@ -75,7 +75,7 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | active | boolean | Define se o produto estará ativo ou não | false
 
 #### PUT
-O endpoint de edição de um produto é o  http://localhost:8080/produtos/*{id}*
+O endpoint de edição de um produto é o  http://localhost:8080/produtos/{id}
 
 > Onde *{id}* deve conter o ID de um produto válido.
 
@@ -95,7 +95,7 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | active | boolean | Define se o produto estará ativo ou não | false
 
 #### DELETE
-O endpoint de exclusão de um produto é o  http://localhost:8080/produtos/*{id}*
+O endpoint de exclusão de um produto é o  http://localhost:8080/produtos/{id}
 
 > Onde *{id}* deve conter o ID de um produto válido.
 
@@ -115,7 +115,7 @@ A listagem pode ser ordenada, e paginada com os atributos:
 
 
 #### GET
-O endpoint para a consulta de um serviço é o http://localhost:8080/servicos/*{id}*
+O endpoint para a consulta de um serviço é o http://localhost:8080/servicos/{id}
 
 > Onde *{id}* deve conter o ID de um serviço válido.
 
@@ -138,7 +138,7 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | active | boolean | Define se o serviço estará ativo ou não | false
 
 #### PUT
-O endpoint de edição de um serviço é o  http://localhost:8080/servicos/*{id}*
+O endpoint de edição de um serviço é o  http://localhost:8080/servicos/{id}
 
 > Onde *{id}* deve conter o ID de um serviço válido.
 
@@ -158,7 +158,7 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | active | boolean | Define se o serviço estará ativo ou não | false
 
 #### DELETE
-O endpoint de exclusão de um serviço é o  http://localhost:8080/servicos/*{id}*
+O endpoint de exclusão de um serviço é o  http://localhost:8080/servicos/{id}
 
 > Onde *{id}* deve conter o ID de um serviço válido.
 
@@ -178,7 +178,7 @@ A listagem pode ser ordenada, e paginada com os atributos:
 
 
 #### GET
-O endpoint para a consulta de um pedido é o http://localhost:8080/pedidos/*{id}*
+O endpoint para a consulta de um pedido é o http://localhost:8080/pedidos/{id}
 
 > Onde *{id}* deve conter o ID de um pedido válido.
 
@@ -204,7 +204,7 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | items | Array[Produtos/Serviços] | Define a lista de items a serem incluídos no pedido | [{"id" : 3}, {"id" : 5}, {"id" : 19}]
 
 #### PUT
-O endpoint de edição de um pedido é o  http://localhost:8080/pedidos/*{id}*
+O endpoint de edição de um pedido é o  http://localhost:8080/pedidos/{id}
 
 > Onde *{id}* deve conter o ID de um pedido válido.
 
@@ -227,6 +227,6 @@ Todos os atributos são obrigatórios, e estão descritos abaixo:
 | items | Array[Produtos/Serviços] | Define a lista de items a serem incluídos no pedido | [{"id" : 3}, {"id" : 5}, {"id" : 19}]
 
 #### DELETE
-O endpoint de exclusão de um pedido é o  http://localhost:8080/pedidos/*{id}*
+O endpoint de exclusão de um pedido é o  http://localhost:8080/pedidos/{id}
 
 > Onde *{id}* deve conter o ID de um pedido válido.
