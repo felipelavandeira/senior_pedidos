@@ -35,6 +35,7 @@ public class OrderItem implements Serializable {
 
     @NotNull
     @Column(name = "tp_item", insertable = false, updatable = false)
+    @JsonIgnore
     private String type;
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
